@@ -1,0 +1,18 @@
+<div style="padding: 13px;">
+  <mat-spinner *ngIf="objects.length === 0"></mat-spinner>
+
+  <mat-card *ngFor="let objects of objects" style="margin-top:10px;">
+    <mat-card-header>
+      <mat-card-title>{{objects.ID}}</mat-card-title>
+      <mat-card-subtitle>
+        {{objects.Geometry}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button title="{{objects.ID}}"> {{objects.ID}}</button>
+      <button mat-button> Edit Geometry</button>
+      <button mat-button> Edit Colour</button>
+      <button mat-button> Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
