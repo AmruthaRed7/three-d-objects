@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
     //})
   }
 
+  //Displays the 3D object for the associated Id
   display(shape, colour) {
-
 
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -74,7 +74,12 @@ export class HomeComponent implements OnInit {
     };
 
     animate();
+    
+  }
 
+  //Reload the page by closing the 3d object window
+  Reload() {
+    window.location.reload();
   }
 
 }
