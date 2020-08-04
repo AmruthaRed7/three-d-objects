@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +34,7 @@ import { objects } from './objects';
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

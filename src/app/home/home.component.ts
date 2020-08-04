@@ -16,10 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-    //this.dataService.sendGetRequest().subscribe((data: any[]) => {
-    //  console.log(data);
-    //  this.Objects = data;
-    //})
+
   }
 
   //Displays the 3D object for the associated Id
@@ -27,42 +24,62 @@ export class HomeComponent implements OnInit {
 
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
 
-    var renderer = new THREE.WebGLRenderer();
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setClearColor("#e5e5e5");
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+
+    document.body.appendChild(renderer.domElement)
+    window.addEventListener('resize', () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    })
     var geometry;
 
-    if (shape == "Cube")
-    {
-      geometry = new THREE.BoxGeometry(1, 1, 1);
+    switch (shape) {
+
+      case "Cube": {
+        geometry = new THREE.BoxGeometry(1, 1, 1);
+        break;
+      }
+
+      case "Sphere": {
+        geometry = new THREE.SphereGeometry(1, 32, 32);
+        break;
+      }
+
+      case "Cone": {
+        geometry = new THREE.ConeGeometry(1, 4, 50);
+        break;
+      }
+
+      case "Cylinder": {
+        geometry = new THREE.CylinderGeometry(1, 1, 3, 300);
+        break;
+      }
+
+      case "Ring": {
+        geometry = new THREE.RingGeometry(1, 2, 32);
+        break;
+      }
+
+      case "Tetrahedron": {
+        geometry = new THREE.TetrahedronGeometry(1, 0);
+        break;
+      }
     }
 
-    else if (shape == "Sphere")
-    {
-      geometry = new THREE.SphereGeometry(1, 1, 1);
-    }
-
-    else if (shape == "Cone")
-    {
-       geometry = new THREE.ConeBufferGeometry(2, 6, 10);
-
-    }
-    else if (shape == "Cylinder")
-    {
-      geometry = new THREE.CylinderBufferGeometry(2, 2, 5, 10);
-    }
-
-    else if (shape == "Ring")
-    {
-      geometry = new THREE.RingGeometry(1, 3, 5);
-    }
-
-    var material = new THREE.MeshBasicMaterial({ color: colour });
+    var material = new THREE.MeshLambertMaterial({ color: colour });
     var design = new THREE.Mesh(geometry, material);
     scene.add(design);
 
     camera.position.z = 5;
+
+    var light = new THREE.PointLight(0xFFFFFF, 1, 500)
+    light.position.set(10, 0, 25);
+    scene.add(light);
 
     var animate = function () {
       requestAnimationFrame(animate);

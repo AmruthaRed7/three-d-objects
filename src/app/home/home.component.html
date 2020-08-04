@@ -1,17 +1,33 @@
 <div style="padding: 13px;">
   <mat-spinner *ngIf="objects.length === 0"></mat-spinner>
 
-  <mat-card *ngFor="let objects of objects" style="margin-top:10px;">
+  <mat-card *ngFor="let object of objects" style="margin-top:10px;">
     <mat-card-header>
-      <mat-card-title>{{objects.ID}}</mat-card-title>
+      <mat-card-title>{{object.ID}}</mat-card-title>
       <mat-card-subtitle>
-        {{objects.Geometry}}
+        {{object.Geometry}}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions>
-      <button mat-button (click)="display(objects.Geometry,objects.colour)" title="{{objects.ID}}"> {{objects.ID}}</button>
-      <button mat-button> Edit Geometry</button>
-      <button mat-button> Edit Colour</button>
+      <button mat-button (click)="display(object.Geometry,object.colour)" title="{{object.ID}}"> {{object.ID}}</button>
+      <mat-form-field>
+        <mat-select (onselect)="display([value],object.colour)" name="editShape" [(value)]="object.Geometry" placeholder="Edit Geometry">
+          <mat-option [value]="'Cube'">Cube</mat-option>
+          <mat-option [value]="'Sphere'">Sphere</mat-option>
+          <mat-option [value]="'Cone'">Cone</mat-option>
+          <mat-option [value]="'Cylinder'">Cylinder</mat-option>
+          <mat-option [value]="'Ring'">Ring</mat-option>
+          <mat-option [value]="'Tetrahedron'">Tetrahedron</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select (onselect)="display(object.Geometry,[value])" name="editColour" [(value)]="object.colour" placeholder="Edit Colour">
+          <mat-option [value]="'#FF0000'">Red</mat-option>
+          <mat-option [value]="'#008000'">Green</mat-option>
+          <mat-option [value]="'#FFFF00'">Yellow</mat-option>
+          <mat-option [value]="'#0000FF'">Blue</mat-option>
+        </mat-select>
+      </mat-form-field>
       <button mat-button> Delete</button>
     </mat-card-actions>
   </mat-card>

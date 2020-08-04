@@ -26,7 +26,7 @@ export const objects = [
   },
   {
     ID: 105,
-    Geometry: 'Cube',
+    Geometry: 'Tetrahedron',
     colour: '#FFFF00',
   },
 
